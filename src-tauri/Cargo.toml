@@ -1,0 +1,33 @@
+[package]
+name = "musicopoly-desktop"
+version = "0.1.0"
+description = "Musicopoly: el juego de mesa musical, como app de escritorio"
+edition = "2021"
+rust-version = "1.90"
+
+[lib]
+name = "musicopoly_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+# sirve la interfaz en http://localhost:<puerto> (no tauri://): YouTube exige un Referer http(s) en sus embeds
+# (si no, error 152/153) y así la página es un «contexto seguro» para micrófono y cámara
+tauri-plugin-localhost = "2"
+# invitaciones musicopoly://sala/ABCD
+tauri-plugin-deep-link = "2"
+serde_json = "1"
+
+# una sola ventana: abrir un enlace musicopoly:// con la app abierta lo recibe la que ya está (Windows/Linux)
+[target.'cfg(any(target_os = "windows", target_os = "linux"))'.dependencies]
+tauri-plugin-single-instance = { version = "2", features = ["deep-link"] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- se suma al Info.plist que genera Tauri. Textos por idioma: macos/<idioma>.lproj/InfoPlist.strings -->
+  <key>CFBundleDevelopmentRegion</key>
+  <string>es</string>
+  <key>CFBundleLocalizations</key>
+  <array>
+    <string>es</string>
+    <string>en</string>
+  </array>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Musicopoly usa el micrófono para hablar con tu mesa online y para los retos de cantar y tararear.</string>
+  <key>NSCameraUsageDescription</key>
+  <string>Musicopoly usa la cámara para que tu mesa online te vea y para escanear los códigos QR de la mesa sin internet.</string>
+</dict>
+</plist>

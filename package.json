@@ -1,0 +1,18 @@
+{
+  "name": "musicopoly-desktop",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Musicopoly como app de escritorio (Tauri v2): envuelve la app web compilada y se conecta al servidor online",
+  "scripts": {
+    "build:web": "node scripts/build-web.mjs",
+    "icons": "tauri icon ../brand/out/mark-1024.png -o src-tauri/icons",
+    "dev": "tauri dev",
+    "build": "npm run build:web && tauri build",
+    "build:debug": "npm run build:web && tauri build --debug",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

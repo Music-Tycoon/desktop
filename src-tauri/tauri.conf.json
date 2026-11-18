@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Musicopoly",
+  "version": "0.1.0",
+  "identifier": "app.musicopoly.desktop",
+  "build": {
+    "frontendDist": "../web-dist",
+    "devUrl": "http://localhost:5181"
+  },
+  "app": {
+    "windows": [],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "category": "BoardGame",
+    "shortDescription": "El juego de mesa musical",
+    "longDescription": "Musicopoly: compra discográficas y estudios, sube al escenario y sé la estrella más rica. Juega en este ordenador, online con amigos o sin internet.",
+    "copyright": "© 2026 Musicopoly",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "11.0",
+      "entitlements": "./Entitlements.plist",
+      "files": {
+        "Resources/es.lproj/InfoPlist.strings": "./macos/es.lproj/InfoPlist.strings",
+        "Resources/en.lproj/InfoPlist.strings": "./macos/en.lproj/InfoPlist.strings"
+      }
+    },
+    "windows": {
+      "webviewInstallMode": { "type": "embedBootstrapper" }
+    }
+  },
+  "plugins": {
+    "deep-link": {
+      "desktop": {
+        "schemes": ["musicopoly"]
+      }
+    }
+  }
+}

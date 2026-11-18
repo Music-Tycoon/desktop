@@ -1,0 +1,6 @@
+// sin consola extra en Windows (release)
+#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
+fn main() {
+    musicopoly_desktop_lib::run()
+}

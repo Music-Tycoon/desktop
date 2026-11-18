@@ -1,0 +1,3 @@
+/* Textos de los permisos de macOS (español) */
+"NSMicrophoneUsageDescription" = "Musicopoly usa el micrófono para hablar con tu mesa online y para los retos de cantar y tararear.";
+"NSCameraUsageDescription" = "Musicopoly usa la cámara para que tu mesa online te vea y para escanear los códigos QR de la mesa sin internet.";
