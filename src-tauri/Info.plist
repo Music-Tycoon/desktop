@@ -11,8 +11,8 @@
     <string>en</string>
   </array>
   <key>NSMicrophoneUsageDescription</key>
-  <string>Musicopoly usa el micrófono para hablar con tu mesa online y para los retos de cantar y tararear.</string>
+  <string>Music Tycoon usa el micrófono para hablar con tu mesa online y para los retos de cantar y tararear.</string>
   <key>NSCameraUsageDescription</key>
-  <string>Musicopoly usa la cámara para que tu mesa online te vea y para escanear los códigos QR de la mesa sin internet.</string>
+  <string>Music Tycoon usa la cámara para que tu mesa online te vea y para escanear los códigos QR de la mesa sin internet.</string>
 </dict>
 </plist>

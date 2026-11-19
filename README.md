@@ -1,6 +1,6 @@
-# Musicopoly de escritorio (Tauri v2)
+# Music Tycoon de escritorio (Tauri v2)
 
-Musicopoly como app de escritorio (macOS, Windows, Linux) con [Tauri v2](https://v2.tauri.app). No hay una segunda
+Music Tycoon como app de escritorio (macOS, Windows, Linux) con [Tauri v2](https://v2.tauri.app). No hay una segunda
 interfaz: es **la misma app web** (`../musicopoly-app`) compilada y metida dentro de la app, en una ventana con el
 navegador del sistema (WKWebView en macOS, WebView2 en Windows, WebKitGTK en Linux). Pesa poco porque no lleva un
 Chromium dentro (Electron sí).
@@ -30,7 +30,7 @@ musicopoly-desktop/
   `window.__MUSICOPOLY_SERVER__` (lo inyecta la app al arrancar) o `VITE_SERVER_URL` al compilar
   (`musicopoly-app/src/net/server.ts`). En la web no cambia nada: sin configurar, todo va al mismo origen.
   Orden de prioridad en la app de escritorio:
-  1. variable de entorno al abrir: `MUSICOPOLY_SERVER=https://mi-servidor open Musicopoly.app`
+  1. variable de entorno al abrir: `MUSICOPOLY_SERVER=https://mi-servidor open "Music Tycoon.app"`
   2. archivo `config.json` en la carpeta de configuración de la app
      (macOS: `~/Library/Application Support/app.musicopoly.desktop/config.json`) con `{"server": "https://…"}`
   3. el indicado al compilar: `MUSICOPOLY_SERVER=https://… npm run build`
@@ -51,7 +51,7 @@ npm install
 
 # app de depuración (rápida de compilar, con inspector web: clic derecho → Inspeccionar)
 MUSICOPOLY_SERVER=https://tu-servidor npm run build:debug -- --bundles app
-open src-tauri/target/debug/bundle/macos/Musicopoly.app
+open "src-tauri/target/debug/bundle/macos/Music Tycoon.app"
 
 # versión final (optimizada; en macOS crea .app y .dmg; en Windows .msi y .exe; en Linux .deb/.rpm/.AppImage)
 MUSICOPOLY_SERVER=https://tu-servidor npm run build
@@ -64,7 +64,7 @@ Diagnóstico (solo compilaciones de depuración): `MUSICOPOLY_DIAG=1` (o `=yt`, 
 encima) hace que la propia ventana compruebe contexto seguro, getUserMedia, WebRTC, WebSocket y API, y lo imprima:
 
 ```bash
-MUSICOPOLY_DIAG=yt src-tauri/target/debug/bundle/macos/Musicopoly.app/Contents/MacOS/musicopoly-desktop
+MUSICOPOLY_DIAG=yt src-tauri/target/debug/bundle/macos/Music\ Tycoon.app/Contents/MacOS/musicopoly-desktop
 # → MUSICOPOLY_DIAG {"origin":"http://localhost:47821","secure":true,"ws":"open","api":200,"dataChannel":"hola",…}
 ```
 
@@ -73,7 +73,7 @@ Al servidor solo le hace falta admitir el origen `http://localhost:47821` en el 
 
 ## Probado (macOS, app de depuración, 17-11-2026)
 
-- La app abre la ventana «Musicopoly» (1400×900, mínimo 960×640) y pinta la portada desde `http://localhost:47821`.
+- La app abre la ventana «Music Tycoon» (1400×900, mínimo 960×640) y pinta la portada desde `http://localhost:47821`.
 - Desde dentro de WKWebView: `isSecureContext` = sí, `getUserMedia` disponible, `RTCPeerConnection` con canal de
   datos local funcionando («hola» de ida y vuelta), WebSocket al servidor online por el túnel abierto.
 - **YouTube:** reproductor con la API de YouTube (como en la partida): `ready` → reproduciendo (estado 1, 6,5 s),

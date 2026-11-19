@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Musicopoly",
+  "productName": "Music Tycoon",
   "version": "0.1.0",
   "identifier": "app.musicopoly.desktop",
   "build": {
@@ -18,8 +18,8 @@
     "targets": "all",
     "category": "BoardGame",
     "shortDescription": "El juego de mesa musical",
-    "longDescription": "Musicopoly: compra discográficas y estudios, sube al escenario y sé la estrella más rica. Juega en este ordenador, online con amigos o sin internet.",
-    "copyright": "© 2026 Musicopoly",
+    "longDescription": "Music Tycoon: compra discográficas y estudios, sube al escenario y sé la estrella más rica. Juega en este ordenador, online con amigos o sin internet.",
+    "copyright": "© 2026 Music Tycoon",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",

@@ -1,3 +1,3 @@
 /* macOS permission prompts (English) */
-"NSMicrophoneUsageDescription" = "Musicopoly uses the microphone so you can talk with your online table and for the sing and hum challenges.";
-"NSCameraUsageDescription" = "Musicopoly uses the camera so your online table can see you and to scan the QR codes of the offline table.";
+"NSMicrophoneUsageDescription" = "Music Tycoon uses the microphone so you can talk with your online table and for the sing and hum challenges.";
+"NSCameraUsageDescription" = "Music Tycoon uses the camera so your online table can see you and to scan the QR codes of the offline table.";

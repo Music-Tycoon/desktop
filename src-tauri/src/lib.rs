@@ -1,4 +1,4 @@
-//! Musicopoly de escritorio: una ventana con la app web (la misma de musicopoly-app, compilada en ../web-dist)
+//! Music Tycoon de escritorio: una ventana con la app web (la misma de musicopoly-app, compilada en ../web-dist)
 //! servida en http://localhost:47821 y conectada al servidor de salas online.
 //!
 //! Servidor: 1) variable de entorno MUSICOPOLY_SERVER al abrir la app, 2) `config.json` con {"server": "https://…"}
@@ -85,7 +85,7 @@ pub fn run() {
                 server.as_ref().map(|s| format!("window.__MUSICOPOLY_SERVER__ = {};", serde_json::Value::from(s.as_str()))).unwrap_or_default()
             );
             let win = WebviewWindowBuilder::new(app, "main", url)
-                .title("Musicopoly")
+                .title("Music Tycoon")
                 .inner_size(1400.0, 900.0)
                 .min_inner_size(960.0, 640.0)
                 .center()
@@ -103,7 +103,7 @@ pub fn run() {
             Ok(())
         })
         .run(tauri::generate_context!())
-        .expect("no se pudo abrir Musicopoly");
+        .expect("no se pudo abrir Music Tycoon");
 }
 
 /// Solo en compilaciones de depuración y con MUSICOPOLY_DIAG=1: comprueba desde la propia ventana el contexto
