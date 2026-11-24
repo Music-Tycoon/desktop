@@ -183,4 +183,4 @@ jobs:
             }
           }
           EOF
-          gh release upload "$TAG" latest.json --clobber
+          gh release upload "$TAG" latest.json --clobber -R Music-Tycoon/desktop
