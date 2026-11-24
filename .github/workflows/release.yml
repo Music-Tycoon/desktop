@@ -27,6 +27,8 @@ jobs:
           - os: windows-latest
             name: Windows
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write # publicar la release con los instaladores
     steps:
       - uses: actions/checkout@v4
         with:
