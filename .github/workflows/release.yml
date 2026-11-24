@@ -60,6 +60,17 @@ jobs:
         working-directory: desktop
         run: npm run build
 
+      # Nombres estables: la landing enlaza a …/releases/latest/download/<fichero>
+      - name: Renombrar instaladores
+        shell: bash
+        working-directory: desktop/src-tauri/target/release/bundle
+        run: |
+          shopt -s nullglob
+          for f in dmg/*.dmg; do mv "$f" "dmg/MusicTycoon-macOS.dmg"; done
+          for f in msi/*.msi; do mv "$f" "msi/MusicTycoon-Windows.msi"; done
+          for f in nsis/*.exe; do mv "$f" "nsis/MusicTycoon-Windows-Setup.exe"; done
+          ls -la dmg msi nsis 2>/dev/null || true
+
       - name: Instaladores
         uses: actions/upload-artifact@v4
         with:
