@@ -5,7 +5,11 @@
 #
 # La build necesita los repos hermanos «app» y «engine» como carpetas vecinas (musicopoly-app y
 # musicopoly-engine): se clonan con el secreto ORG_REPO_PAT (token con lectura a los repos de la org).
-# Los instaladores llevan el servidor online incrustado (MUSICOPOLY_SERVER): app.musictycoon.online.
+# Los instaladores llevan el servidor online incrustado (MUSICOPOLY_SERVER): play.musictycoon.online.
+#
+# Firma de macOS (opcional): si existen los secretos DEVELOPER_ID_P12 (+_PASSWORD) y APPLE_API_KEY
+# (+_ID / +_ISSUER_ID) se firma con Developer ID y se notariza/grapa el DMG — sin aviso de Gatekeeper.
+# Sin ellos la build sale adhoc (el usuario instala con xattr -dr com.apple.quarantine).
 name: release
 
 on:
@@ -29,6 +33,9 @@ jobs:
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write # publicar la release con los instaladores
+    env:
+      HAS_CERT: ${{ secrets.DEVELOPER_ID_P12 != '' }}
+      HAS_NOTARY: ${{ secrets.APPLE_API_KEY != '' }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -58,9 +65,43 @@ jobs:
       - name: Rust
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Certificado Developer ID (si existe)
+        if: matrix.name == 'macOS' && env.HAS_CERT == 'true'
+        env:
+          P12: ${{ secrets.DEVELOPER_ID_P12 }}
+          P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
+        run: |
+          KEYCHAIN="$RUNNER_TEMP/signing.keychain-db"
+          KEYCHAIN_PASSWORD=$(uuidgen)
+          echo "$P12" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 3600 "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security import "$RUNNER_TEMP/cert.p12" -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN"
+          security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN" > /dev/null
+          security list-keychains -d user -s "$KEYCHAIN" login.keychain-db
+          rm "$RUNNER_TEMP/cert.p12"
+          IDENTITY=$(security find-identity -v -p codesigning "$KEYCHAIN" | awk -F'"' '/Developer ID Application/ {print $2; exit}')
+          if [ -z "$IDENTITY" ]; then echo "No Developer ID Application identity in the certificate"; exit 1; fi
+          echo "APPLE_SIGNING_IDENTITY=$IDENTITY" >> "$GITHUB_ENV"
+
       - name: Build (web + tauri)
         working-directory: desktop
         run: npm run build
+
+      - name: Notarizar y grapar el DMG
+        if: matrix.name == 'macOS' && env.HAS_CERT == 'true' && env.HAS_NOTARY == 'true'
+        env:
+          API_KEY: ${{ secrets.APPLE_API_KEY }}
+          API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+          API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
+        run: |
+          DMG=$(ls desktop/src-tauri/target/release/bundle/dmg/*.dmg | head -1)
+          echo "$API_KEY" | base64 --decode > "$RUNNER_TEMP/AuthKey.p8"
+          xcrun notarytool submit "$DMG" --key "$RUNNER_TEMP/AuthKey.p8" --key-id "$API_KEY_ID" --issuer "$API_ISSUER_ID" --wait --output-format json | tee "$RUNNER_TEMP/notary.json"
+          rm "$RUNNER_TEMP/AuthKey.p8"
+          grep -q '"status":"Accepted"' "$RUNNER_TEMP/notary.json"
+          xcrun stapler staple "$DMG"
 
       # Nombres estables: la landing enlaza a …/releases/latest/download/<fichero>
       - name: Renombrar instaladores

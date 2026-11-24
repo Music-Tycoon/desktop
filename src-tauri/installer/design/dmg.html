@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- Fondo de la ventana del DMG: 640×400 lógicos (render a 2× → 1280×800).
+     El Finder dibuja el icono de la app en (170,205) y el alias de
+     Aplicaciones en (470,205); aquí solo va el decorado entre medias. -->
+<meta charset="utf-8" />
+<style>
+  @font-face {
+    font-family: 'Luckiest Guy';
+    src: url('file:///Users/user/Downloads/Monopoly/musicopoly-landing/fonts/luckiest-guy-latin-400-normal.woff2');
+  }
+  @font-face {
+    font-family: 'Nunito';
+    src: url('file:///Users/user/Downloads/Monopoly/musicopoly-landing/fonts/nunito-latin-wght-normal.woff2');
+  }
+  * { margin: 0; box-sizing: border-box; }
+  body {
+    width: 640px; height: 400px; position: relative; overflow: hidden;
+    font-family: 'Nunito', sans-serif; color: #1d1433;
+    background-color: #efe9ff;
+    background-image: radial-gradient(#ddd2ff 5px, transparent 5.5px);
+    background-size: 36px 36px;
+  }
+  .logo {
+    position: absolute; top: 26px; left: 50%; transform: translateX(-50%);
+    width: 300px; height: auto; display: block;
+  }
+  .arrow {
+    position: absolute; left: 50%; top: 196px; transform: translate(-50%, -50%);
+    width: 118px; height: 46px;
+  }
+  .cap {
+    position: absolute; left: 0; right: 0; top: 304px; text-align: center;
+    font-family: 'Luckiest Guy', sans-serif; font-size: 21px; letter-spacing: 0.03em;
+  }
+  .sub {
+    position: absolute; left: 0; right: 0; top: 336px; text-align: center;
+    font-weight: 800; font-size: 12.5px; color: #4b4166;
+  }
+</style>
+<img class="logo" src="file:///Users/user/Downloads/Monopoly/brand/out/logo-horizontal.png" alt="" />
+<svg class="arrow" viewBox="0 0 118 46" aria-hidden="true">
+  <g transform="translate(0,6)">
+    <path d="M4 9 h70 v-8 l40 20 -40 20 v-8 h-70 z" fill="#1d1433" />
+  </g>
+  <path d="M4 9 h70 v-8 l40 20 -40 20 v-8 h-70 z" fill="#ff5fa2" stroke="#1d1433" stroke-width="5" stroke-linejoin="round" />
+</svg>
+<p class="cap">Arrastra a Aplicaciones</p>
+<p class="sub">Drag Music Tycoon to Applications · play.musictycoon.online</p>
