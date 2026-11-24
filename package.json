@@ -1,7 +1,7 @@
 {
   "name": "musicopoly-desktop",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Music Tycoon como app de escritorio (Tauri v2): envuelve la app web compilada y se conecta al servidor online",
   "scripts": {

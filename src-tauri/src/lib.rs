@@ -69,6 +69,8 @@ pub fn run() {
     builder
         .plugin(tauri_plugin_localhost::Builder::new(PORT).build())
         .plugin(tauri_plugin_deep_link::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
+        .plugin(tauri_plugin_process::init())
         .setup(|app| {
             let handle = app.handle().clone();
             let server = server_url(&handle);
