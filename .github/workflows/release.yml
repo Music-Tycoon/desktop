@@ -14,7 +14,7 @@ on:
   workflow_dispatch: {}
 
 env:
-  MUSICOPOLY_SERVER: https://app.musictycoon.online
+  MUSICOPOLY_SERVER: https://play.musictycoon.online
 
 jobs:
   build:
